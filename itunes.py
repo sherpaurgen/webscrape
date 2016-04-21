@@ -17,7 +17,8 @@ class AppCrawler:
     	#print start_page.text
     	tree = html.fromstring(start_page.text)
     	name = tree.xpath('//div[@class="id-app-title"]/text()')[0]
-    	developer=tree.xpath('//a[@class="dev-link"]/text()')[0]
+    	developer=tree.xpath('//div[@class="dev-link"]//*/div/@href')
+    	#developer=tree.xpath('//div[contains(@href,"mailto")]/text()')
     	print name,developer
     	return 
 
