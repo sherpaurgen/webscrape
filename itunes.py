@@ -22,3 +22,7 @@ class App:
 		"\nPrice: " + self.price.encode('UTF-8')+"\n")
 
 crawler = AppCrawler()
+crawler.crawl()
+for app in crawler.apps:
+	print app
+
