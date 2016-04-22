@@ -1,0 +1,12 @@
+# setup enviroment for ubuntu 16.04 LTS 
+# install python pip
+    
+    sudo apt-get install python-pip python-dev build-essential
+    sudo pip install virtualenv virtualenvwrapper
+# install lxml python
+ 
+    apt-get install libxml2-dev libxslt1-dev python-dev
+    If you're happy with a possibly older version of lxml altogether though, you could try
+    apt-get install python-lxml
+    pip install --upgrade lxml
+
