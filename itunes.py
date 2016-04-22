@@ -20,8 +20,19 @@ class AppCrawler:
     	#developer=tree.xpath('//a[@class="dev-link"]//*/div/@href')
     	temp_addr=tree.xpath('//a[contains(@href,"mailto") and @class="dev-link"]/@href')[0]
         developer=temp_addr.split(':')
-    	#developer=temp_addr.split(':')
-        return name,developer[1]
+        
+        price=tree.xpath('//button[@class="price buy id-track-click id-track-impression"]/span[2]/text()')
+        temp_price=price[0].split()
+        price=temp_price[0].lstrip('$')
+        if price=="Install":
+            price=0
+
+        #links=tree.xpath('//div[@class="cards id-card-list"]//*/div[@class="card no-rationale square-cover apps medium-minus"]//*/div[@class="card-content id-track-click id-track-impression"]//*/a[@class="card-click-target"]/@href')     
+        links=tree.xpath('//div[@class="cards id-card-list"]/@class')[0]
+        #print name,developer[1],price
+        print links
+        
+        return name,developer[1],price
     	
 
 class App:
@@ -36,7 +47,7 @@ class App:
 		"\nDeveloper: " + self.developer.encode('UTF-8')+
 		"\nPrice: " + self.price.encode('UTF-8')+"\n")
 
-crawler = AppCrawler('https://play.google.com/store/apps/details?id=com.hecorat.packagedisabler',0)
+crawler = AppCrawler('https://play.google.com/store/apps/details?id=com.picsart.studio',0)
 crawler.crawl()
 for app in crawler.apps:
 	print app
