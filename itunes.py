@@ -28,7 +28,7 @@ class AppCrawler:
             price=0
 
         #links=tree.xpath('//div[@class="cards id-card-list"]//*/div[@class="card no-rationale square-cover apps medium-minus"]//*/div[@class="card-content id-track-click id-track-impression"]//*/a[@class="card-click-target"]/@href')     
-        links=tree.xpath('//div[@class="cards id-card-list"]/@class')[0]
+        links=tree.xpath('//*[@id="body-content"]/div[2]/div/div[1]/div[1]/div/div[1]/div/div[2]')
         #print name,developer[1],price
         print links
         
