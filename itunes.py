@@ -16,7 +16,9 @@ class AppCrawler:
     	start_page=requests.get(link)
     	#print start_page.text
     	tree = html.fromstring(start_page.text)
-    	name = tree.xpath('//div[@class="id-app-title"]/text()')[0]
+        # the tree.xpath(...) gives an array 
+    	name = tree.xpath('//div[@class="id-app-title"]/text()')[0]  
+
     	#developer=tree.xpath('//a[@class="dev-link"]//*/div/@href')
     	temp_addr=tree.xpath('//a[contains(@href,"mailto") and @class="dev-link"]/@href')[0]
         developer=temp_addr.split(':')
@@ -28,11 +30,13 @@ class AppCrawler:
             price=0
 
         #links=tree.xpath('//div[@class="cards id-card-list"]//*/div[@class="card no-rationale square-cover apps medium-minus"]//*/div[@class="card-content id-track-click id-track-impression"]//*/a[@class="card-click-target"]/@href')     
-        links=tree.xpath('//*[@id="body-content"]/div[2]/div/div[1]/div[1]/div/div[1]/div/div[2]')
-        #print name,developer[1],price
-        print links
+        #links=tree.xpath('//*[@id="body-content"]/div[2]/div/div[1]/div[1]/div/div[1]/div/div[2]')
+        links = tree.xpath('//*[@id="body-content"]/div[2]/div/div[2]/div[1]/div//*/a[2]/@href')
+        print len(links)
+        print name,developer[1],price,links
+        #print temp_addr,developer,name,developer[1],price,links
         
-        return name,developer[1],price
+        return name,developer[1],price,links
     	
 
 class App:
@@ -47,7 +51,7 @@ class App:
 		"\nDeveloper: " + self.developer.encode('UTF-8')+
 		"\nPrice: " + self.price.encode('UTF-8')+"\n")
 
-crawler = AppCrawler('https://play.google.com/store/apps/details?id=com.picsart.studio',0)
+crawler = AppCrawler('https://play.google.com/store/apps/details?id=com.mojang.minecraftpe',0)
 crawler.crawl()
 for app in crawler.apps:
 	print app
