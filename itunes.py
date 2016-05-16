@@ -28,15 +28,11 @@ class AppCrawler:
         price=temp_price[0].lstrip('$')
         if price=="Install":
             price=0
-
-        #links=tree.xpath('//div[@class="cards id-card-list"]//*/div[@class="card no-rationale square-cover apps medium-minus"]//*/div[@class="card-content id-track-click id-track-impression"]//*/a[@class="card-click-target"]/@href')     
-        #links=tree.xpath('//*[@id="body-content"]/div[2]/div/div[1]/div[1]/div/div[1]/div/div[2]')
-        links = tree.xpath('//*[@id="body-content"]/div[2]/div/div[2]/div[1]/div//*/a[2]/@href')
-        print len(links)
-        print name,developer[1],price,links
-        #print temp_addr,developer,name,developer[1],price,links
-        
-        return name,developer[1],price,links
+        testlinks = tree.xpath("//a[@class='title']/@href")
+        #print len(testlinks)
+        #links = [h for h in tree.xpath("//a[@class='title']/@href")]
+        print testlinks
+        #return name,developer[1],price,links
     	
 
 class App:
@@ -55,4 +51,4 @@ crawler = AppCrawler('https://play.google.com/store/apps/details?id=com.mojang.m
 crawler.crawl()
 for app in crawler.apps:
 	print app
-
+    
